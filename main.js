@@ -91,6 +91,13 @@ class ProductManager {
           }
         return this.getProducts()
         .then(prod => {
+
+            let newCode = Math.floor(Math.random(1) * 10000)
+            const copiCode = prod.some(item => item.code === newCode)
+            if(copiCode === true){
+                newCode = "ERROR"
+            }
+
             const product = {
                 id: id,
                 title: title,
@@ -98,6 +105,7 @@ class ProductManager {
                 price: price,
                 thumbnail: thumbnail,
                 stock: stock ?? 50,
+                code: newCode
             }
             prod.push(product)
             return prod
